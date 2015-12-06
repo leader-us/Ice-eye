@@ -1,0 +1,122 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div style="padding-bottom: 5px;">
+					<a onclick="fnClickAddRow();" href="javascript:void(0);"
+						class="btn btn-primary " data-toggle="modal"
+						data-target="#myModal">添加主机</a>
+				</div>
+				<table id="example1" class="table table-bordered table-hover"
+					style="font-size: 12px;">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Host Name</th>
+							<th>IP</th>
+							<th>Cores</th>
+							<th>Memory</th>
+							<th>SSH login</th>
+							<th>Usage</th>
+							<th>location</th>
+							
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
+	</div>
+	<!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">添加主机</h4>
+			</div>
+			<div class="modal-body">
+				<!-- Horizontal Form -->
+		          <div class="box box-info" style="margin-bottom:0px;">
+		            <!-- form start -->
+		            <form class="form-horizontal">
+		              <div class="box-body">
+		                <div class="form-group">
+		                  <label for="hostName" class="col-sm-2 control-label">Host Name</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="hostName" >
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="ip" class="col-sm-2 control-label">IP</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="ip"  >
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="rootpass" class="col-sm-2 control-label">Root Password</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="rootpass"  >
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="usage" class="col-sm-2 control-label">Usage</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="usage"  >
+		                  </div>
+		                </div>
+		                
+		              </div>
+		              <!-- /.box-body -->
+		            </form>
+		          </div>
+		          <!-- /.box -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					关<span style="padding-left: 12px" />闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					保<span style="padding-left: 12px" />存
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	// To make Pace works on Ajax calls
+	$(document).ajaxStart(function() { Pace.restart(); });
+    $('#example1').DataTable({
+        "ajax":"/hostlist/1",
+        "columns": [
+        			{ "data": "id" },
+        			{ "data": "hostName" },
+        			{ "data": "ip" },
+        			{ "data": "cores" },
+        			{ "data": "memory" },
+        			{ "data": "sshLogin" },
+        			{ "data": "usageFlag" },
+        			{ "data": "location" }
+	       		],
+       		"buttons": [
+       		          {
+       		              text: 'Reload',
+       		              action: function ( e, dt, node, config ) {
+       		                  dt.ajax.reload();
+       		              }
+       		          }
+       		      ]
+    });
+</script>

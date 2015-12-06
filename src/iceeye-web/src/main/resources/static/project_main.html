@@ -1,0 +1,118 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div style="padding-bottom: 5px;">
+					<a onclick="fnClickAddRow();" href="javascript:void(0);"
+						class="btn btn-primary " data-toggle="modal"
+						data-target="#myModal">新增Application</a>
+				</div>
+				<table id="example1" class="table table-bordered table-hover"
+					style="font-size: 12px;">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Tenant_Id</th>
+							<th>owner</th>
+							<th>name</th>
+							<th>version</th>
+							<th>k8s_version</th>
+							<th>note</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
+	</div>
+	<!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">新增Application</h4>
+			</div>
+			<div class="modal-body">
+				<!-- Horizontal Form -->
+		          <div class="box box-info" style="margin-bottom:0px;">
+		            <!-- form start -->
+		            <form class="form-horizontal">
+		              <div class="box-body">
+		                <div class="form-group">
+		                  <label for="name" class="col-sm-2 control-label">Name</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="name" >
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="version" class="col-sm-2 control-label">Version</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="version"  >
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="k8s-version" class="col-sm-2 control-label">Kubernetes Version</label>
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="k8s-version"  >
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="note" class="col-sm-2 control-label">Note</label>
+		                  <div class="col-sm-10">
+		                    <input type="textearea" class="form-control" id="note"  >
+		                  </div>
+		                </div>
+		              </div>
+		              <!-- /.box-body -->
+		            </form>
+		          </div>
+		          <!-- /.box -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					关<span style="padding-left: 12px" />闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					保<span style="padding-left: 12px" />存
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	// To make Pace works on Ajax calls
+	$(document).ajaxStart(function() { Pace.restart(); });
+    $('#example1').DataTable({
+        "ajax":"/projectlist",
+        "columns": [
+        			{ "data": "id" },
+        			{ "data": "tenantId" },
+        			{ "data": "owner" },
+        			{ "data": "name" },
+        			{ "data": "version" },
+        			{ "data": "k8sVersion" },
+        			{ "data": "note"},
+        		],
+       		"buttons": [
+       		          {
+       		              text: 'Reload',
+       		              action: function ( e, dt, node, config ) {
+       		                  dt.ajax.reload();
+       		              }
+       		          }
+       		      ]
+    });
+</script>
